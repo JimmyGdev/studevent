@@ -65,7 +65,7 @@ app.post("/events", (req, res) =>{
 
 // Update event
 
-app.put("/events/:id", (req, res) =>{
+app.patch("/events/:id", (req, res) =>{
     const event = eventList.find(event => event.id === parseInt(req.params.id))
     if(!event){
         res.status(404).send({message :"Event not found" })
