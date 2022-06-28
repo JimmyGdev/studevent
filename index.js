@@ -1,6 +1,11 @@
 const express = require('express')
 const app = express()
 
+
+
+app.use (express.json())
+
+
 const eventList = [
     {
         id: 1,
@@ -46,5 +51,38 @@ app.get("/contact", (req, res) =>{
 //Create event
 
 app.post("/events", (req, res) =>{
-    res.send("Create event")
+    console.log(req.body)
+    const event = {
+        id: eventList.length+1,
+        //...req.body
+        name: req.body.name,
+        date: req.body.date,
+    }
+    eventList.push(event)
+    res.send(event)
+    res.status(200).send({message : "Event created"})
+})
+
+// Update event
+
+app.put("/events/:id", (req, res) =>{
+    const event = eventList.find(event => event.id === parseInt(req.params.id))
+    if(!event){
+        res.status(404).send({message :"Event not found" })
+    }
+    if(req.body.name ) event.name = req.body.name
+    if(req.body.date) event.date = req.body.date
+
+    res.send(event)
+})
+
+//Delete event
+app.delete("/events/:id", (req, res) =>{
+    const event = eventList.find(event => event.id === parseInt(req.params.id))
+    if(!event){
+        res.status(404).send({message :"Event not found" })
+    }
+    const index = eventList.indexOf(event)
+    eventList.splice(index, 1)
+    res.status(200).send(event)
 })
