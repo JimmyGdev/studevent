@@ -46,5 +46,5 @@ app.get("/contact", (req, res) =>{
 //Create event
 
 app.post("/events", (req, res) =>{
-    res.send("Create event")
+    res.send("Create fevent")
 })
