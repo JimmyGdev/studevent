@@ -42,3 +42,9 @@ app.get("/events/:id", (req, res) =>{
 app.get("/contact", (req, res) =>{
     res.send("Hello contact test nodemon")
 })
+
+//Create event
+
+app.post("/events", (req, res) =>{
+    res.send("Create event")
+})
